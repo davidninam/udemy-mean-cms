@@ -16,7 +16,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('data')) {
+      this.router.navigateByUrl('');
+    }
+  }
 
   register(f) {
     const value = f.value;
@@ -41,6 +45,7 @@ export class RegisterComponent implements OnInit {
             5000
           );
         } else {
+          localStorage.setItem('userRegistered', 'true');
           this.router.navigateByUrl('login');
         }
       });

@@ -43,14 +43,26 @@ router.post('/register', function(req, res) {
 /*
 * User Login
 */
-router.get('/:id', function(req, res) {
-	var slug = req.params.slug;
-
-	User.findOne({ slug: slug }, function(err, page) {
-		if (err) {
-			console.log(err);
+router.post('/login', function(req, res) {
+	User.findOne({ username: req.body.username }, function(err, user) {
+		if (err) console.log(err);
+		if (user) {
+			if (user.username == req.body.username) {
+				// username exists
+				// Check for password
+				if (user.password == req.body.password) {
+					// Username and password matched
+					res.json(user._id);
+				} else {
+					res.json('wrongPassword');
+				}
+			} else {
+				res.json('userNotExists');
+			}
+		} else {
+			// Username doesnot exists, send message 'userNotExists'
+			res.json('userNotExists');
 		}
-		res.json(page);
 	});
 });
 
