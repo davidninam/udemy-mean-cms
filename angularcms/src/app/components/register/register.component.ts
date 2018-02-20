@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   username: string;
   password: string;
+  email: string;
   userExists = false;
+  emailExists = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -22,13 +24,21 @@ export class RegisterComponent implements OnInit {
 
     if (valid) {
       this.userService.register(value).subscribe(res => {
-        if (res === 'userExists') {
+        if (res === 'usernameExists') {
           this.userExists = true;
           setTimeout(
             function() {
               this.userExists = false;
             }.bind(this),
-            2000
+            5000
+          );
+        } else if (res === 'emailExists') {
+          this.emailExists = true;
+          setTimeout(
+            function() {
+              this.emailExists = false;
+            }.bind(this),
+            5000
           );
         } else {
           this.router.navigateByUrl('login');
