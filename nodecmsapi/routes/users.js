@@ -52,7 +52,7 @@ router.post('/login', function(req, res) {
 				// Check for password
 				if (user.password == req.body.password) {
 					// Username and password matched
-					res.json(user._id);
+					res.json(user.username);
 				} else {
 					res.json('wrongPassword');
 				}
@@ -62,6 +62,20 @@ router.post('/login', function(req, res) {
 		} else {
 			// Username doesnot exists, send message 'userNotExists'
 			res.json('userNotExists');
+		}
+	});
+});
+
+/*
+* Get Username from ID
+*/
+router.get('/name/:id', function(req, res) {
+	User.findOne({ _id: req.params.id }, function(err, user) {
+		if (err) console.log(err);
+		if (user) {
+			res.json(user.username);
+		} else {
+			res.json('wrongId');
 		}
 	});
 });

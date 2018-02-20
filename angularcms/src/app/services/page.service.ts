@@ -18,4 +18,10 @@ export class PageService {
       .get('http://localhost:3000/pages/' + slug)
       .map(res => res.json());
   }
+
+  getUsername(id) {
+    return this.http
+      .get('http://localhost:3000/users/name/' + id)
+      .map(res => res.json());
+  }
 }
