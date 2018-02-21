@@ -28,7 +28,7 @@ export class AdminSidebarComponent implements OnInit {
     }
 
     this.sidebarService.getSidebar().subscribe(res => {
-      this.content = res.content;
+      this.content = res['content'];
 
       // this.successMsg = true;
       // setTimeout(

@@ -37,10 +37,10 @@ export class AdminEditPageComponent implements OnInit {
       this.param = params['id'];
       this.pageService.getEditPage(this.param).subscribe(page => {
         this.page = page;
-        this.id = page._id;
-        this.title = page.title;
-        this.content = page.content;
-        if (page.sidebar === 'yes') {
+        this.id = page['_id'];
+        this.title = page['title'];
+        this.content = page['content'];
+        if (page['sidebar'] === 'yes') {
           this.sidebar = true;
         }
       });

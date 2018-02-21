@@ -28,18 +28,5 @@ export class NavbarComponent implements OnInit {
       this.pageService.pagesBS.next(pages);
       this.pages = this.pageService.pagesBS;
     });
-
-    // this.getUsername();
   }
-
-  // getUsername() {
-  //   const id = localStorage.getItem('data');
-  //   if (id != null) {
-  //     this.pageService.getUsername(id).subscribe(res => {
-  //       this.user = res;
-  //     });
-  //   }
-
-  //   console.log('Function loaded');
-  // }
 }
