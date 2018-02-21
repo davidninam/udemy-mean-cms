@@ -15,6 +15,7 @@ export class AdminAddPagesComponent implements OnInit {
   errorMsg = false;
   title: string;
   content: string;
+  hasSidebar: boolean;
 
   constructor(private pageService: PageService, private router: Router) {}
 
@@ -29,6 +30,7 @@ export class AdminAddPagesComponent implements OnInit {
   addPage(f) {
     const value = f.value;
     const valid = f.valid;
+
     f.reset();
 
     if (valid) {

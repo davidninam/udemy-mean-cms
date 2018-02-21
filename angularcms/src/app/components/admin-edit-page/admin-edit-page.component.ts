@@ -18,6 +18,8 @@ export class AdminEditPageComponent implements OnInit {
   errorMsg = false;
   errorMsg2 = false;
   param: any;
+  hasSidebar: boolean;
+  sidebar = false;
 
   constructor(
     private pageService: PageService,
@@ -38,6 +40,9 @@ export class AdminEditPageComponent implements OnInit {
         this.id = page._id;
         this.title = page.title;
         this.content = page.content;
+        if (page.sidebar === 'yes') {
+          this.sidebar = true;
+        }
       });
     });
   }

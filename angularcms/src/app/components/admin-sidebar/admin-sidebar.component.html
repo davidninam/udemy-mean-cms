@@ -1,0 +1,19 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Sidebar edited.</p>
+</div>
+
+
+<h1 class="page-title">Edit Sidebar</h1>
+<a routerLink="/admin/pages" class="btn btn-primary">Back to All Pages</a>
+
+<form novalidate #f="ngForm" (ngSubmit)="editSidebar(f)">
+
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea class="form-control" cols="30" rows="10" placeholder="Content" name="content" [(ngModel)]="content"></textarea>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!f.valid">Edit Sidebar</button>
+  </div>
+</form>

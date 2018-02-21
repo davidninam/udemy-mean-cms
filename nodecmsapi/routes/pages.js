@@ -35,6 +35,9 @@ router.post('/add-page', function(req, res) {
 	var title = req.body.title;
 	var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
 	var content = req.body.content;
+	var hasSidebar = req.body.hasSidebar;
+	var sidebar = hasSidebar ? 'yes' : 'no';
+
 	Page.findOne({ slug: slug }, function(err, page) {
 		if (err) console.log(err);
 		if (page) {
@@ -44,7 +47,7 @@ router.post('/add-page', function(req, res) {
 				title: title,
 				slug: slug,
 				content: content,
-				sidebar: 'no'
+				sidebar: sidebar
 			});
 			page.save(err => {
 				if (err) console.log('Error in saving page: ', err);
@@ -76,6 +79,8 @@ router.post('/edit-page/:id', function(req, res) {
 	var title = req.body.title;
 	var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
 	var content = req.body.content;
+	var hasSidebar = req.body.hasSidebar;
+	var sidebar = hasSidebar ? 'yes' : 'no';
 
 	Page.findOne({ slug: slug, _id: { $ne: id } }, function(e, p) {
 		if (e) console.log(e);
@@ -89,6 +94,7 @@ router.post('/edit-page/:id', function(req, res) {
 				page.title = title;
 				page.slug = slug;
 				page.content = content;
+				page.sidebar = sidebar;
 
 				page.save(err => {
 					if (err) {
