@@ -51,8 +51,12 @@ export class LoginComponent implements OnInit {
             5000
           );
         } else {
-          localStorage.setItem('data', res);
-          this.router.navigateByUrl('');
+          localStorage.setItem('data', JSON.stringify(res));
+          if (localStorage.getItem('data') === '"admin"') {
+            this.router.navigateByUrl('admin/pages');
+          } else {
+            this.router.navigateByUrl('');
+          }
         }
       });
     } else {

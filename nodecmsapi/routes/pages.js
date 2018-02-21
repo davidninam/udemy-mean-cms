@@ -28,5 +28,31 @@ router.get('/:slug', function(req, res) {
 	});
 });
 
+/*
+* Post Add Page
+*/
+router.post('/add-page', function(req, res) {
+	var title = req.body.title;
+	var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+	var content = req.body.content;
+	Page.findOne({ slug: slug }, function(err, page) {
+		if (err) console.log(err);
+		if (page) {
+			res.json('pageExists');
+		} else {
+			var page = new Page({
+				title: title,
+				slug: slug,
+				content: content,
+				sidebar: 'no'
+			});
+			page.save(err => {
+				if (err) console.log('Error in saving page: ', err);
+				res.json('ok');
+			});
+		}
+	});
+});
+
 // Export
 module.exports = router;

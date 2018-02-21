@@ -24,4 +24,10 @@ export class PageService {
       .get('http://localhost:3000/users/name/' + id)
       .map(res => res.json());
   }
+
+  postAddPage(data) {
+    return this.http
+      .post('http://localhost:3000/pages/add-page', data)
+      .map(res => res.json());
+  }
 }

@@ -1,0 +1,33 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Page added</p>
+</div>
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Page title exists, choose another.</p>
+</div>
+
+<h1 class="page-title">Add a page</h1>
+<a routerLink="/admin/pages" class="btn btn-primary">Bacl to All Pages</a>
+
+<form novalidate #f="ngForm" (ngSubmit)="addPage(f)">
+
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="title" #pageTitle="ngModel" minlength="4"
+      required>
+  </div>
+  <div class="alert alert-danger" *ngIf="pageTitle?.errors?.required && pageTitle.touched">
+    <p>Title is required</p>
+  </div>
+  <div class="alert alert-danger" *ngIf="pageTitle?.errors?.minlength && pageTitle.touched">
+    <p>Minimum 4 charcters</p>
+  </div>
+
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea class="form-control" cols="30" rows="10" placeholder="Content" name="content" [(ngModel)]="content"></textarea>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!f.valid">Add Page</button>
+  </div>
+</form>
