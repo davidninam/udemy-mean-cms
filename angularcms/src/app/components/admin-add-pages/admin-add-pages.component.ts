@@ -19,17 +19,20 @@ export class AdminAddPagesComponent implements OnInit {
   constructor(private pageService: PageService, private router: Router) {}
 
   ngOnInit() {
-    CKEDITOR.replace('content');
+    if (localStorage.getItem('data') !== '"admin"') {
+      this.router.navigateByUrl('');
+    } else {
+      CKEDITOR.replace('content');
+    }
   }
 
   addPage(f) {
-    console.log(f);
-
     const value = f.value;
     const valid = f.valid;
     f.reset();
 
     if (valid) {
+      value.content = CKEDITOR.instances.content.getData();
       this.pageService.postAddPage(value).subscribe(res => {
         if (res === 'pageExists') {
           this.errorMsg = true;
@@ -48,6 +51,7 @@ export class AdminAddPagesComponent implements OnInit {
             3000
           );
         }
+        CKEDITOR.instances.content.setData('');
         this.pageService.getPages().subscribe(resPages => {
           this.pageService.pagesBS.next(resPages);
         });

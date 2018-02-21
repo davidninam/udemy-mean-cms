@@ -54,5 +54,50 @@ router.post('/add-page', function(req, res) {
 	});
 });
 
+/*
+* Get Edit Page
+*/
+router.get('/edit-page/:id', function(req, res) {
+	var id = req.params.id;
+
+	Page.findOne({ _id: id }, function(err, page) {
+		if (err) {
+			console.log(err);
+		}
+		res.json(page);
+	});
+});
+
+/*
+* Post Edit Page
+*/
+router.post('/edit-page/:id', function(req, res) {
+	var id = req.params.id;
+	var title = req.body.title;
+	var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+	var content = req.body.content;
+
+	Page.findOne({ _id: id }, function(err, page) {
+		if (err) console.log(err);
+
+		if (page.slug === slug) {
+			res.json('pageExists');
+		} else {
+			page.title = title;
+			page.slug = slug;
+			page.content = content;
+
+			page.save(err => {
+				if (err) {
+					console.log('Error in saving page: ', err);
+					res.json('errorInEdit');
+				} else {
+					res.json('ok');
+				}
+			});
+		}
+	});
+});
+
 // Export
 module.exports = router;

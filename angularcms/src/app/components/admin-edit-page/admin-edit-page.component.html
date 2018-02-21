@@ -1,14 +1,17 @@
 <div class="alert alert-success" *ngIf="successMsg">
-  <p>Page added</p>
+  <p>Page edited.</p>
 </div>
 <div class="alert alert-danger" *ngIf="errorMsg">
-  <p>Page title exists, choose another.</p>
+  <p>Page title already in use, choose another.</p>
+</div>
+<div class="alert alert-danger" *ngIf="errorMsg2">
+  <p>Error in saving edited page, try again later.</p>
 </div>
 
-<h1 class="page-title">Add a page</h1>
+<h1 class="page-title">Edit '{{ page?.title }}' page</h1>
 <a routerLink="/admin/pages" class="btn btn-primary">Back to All Pages</a>
 
-<form novalidate #f="ngForm" (ngSubmit)="addPage(f)">
+<form novalidate #f="ngForm" (ngSubmit)="editPage(f)">
 
   <div class="form-group">
     <label for="title">Title:</label>
@@ -27,7 +30,9 @@
     <textarea class="form-control" cols="30" rows="10" placeholder="Content" name="content" [(ngModel)]="content"></textarea>
   </div>
 
+  <input type="hidden" name="id" [(ngModel)]="id">
+
   <div class="form-group">
-    <button class="btn btn-primary" [disabled]="!f.valid">Add Page</button>
+    <button class="btn btn-primary" [disabled]="!f.valid">Save Page</button>
   </div>
 </form>

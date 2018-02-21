@@ -16,6 +16,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { AdminPagesComponent } from './components/admin-pages/admin-pages.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { AdminAddPagesComponent } from './components/admin-add-pages/admin-add-pages.component';
+import { AdminEditPageComponent } from './components/admin-edit-page/admin-edit-page.component';
 
 const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'admin/pages', component: AdminPagesComponent },
   { path: 'admin/add-page', component: AdminAddPagesComponent },
+  { path: 'admin/edit-page/:id', component: AdminEditPageComponent },
   { path: ':page', component: PagesComponent },
   { path: '', component: PagesComponent }
 ];
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     LogoutComponent,
     AdminPagesComponent,
     AdminNavbarComponent,
-    AdminAddPagesComponent
+    AdminAddPagesComponent,
+    AdminEditPageComponent
   ],
   imports: [
     BrowserModule,
