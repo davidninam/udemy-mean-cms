@@ -1,8 +1,8 @@
 <div class="alert alert-success" *ngIf="successMsg">
-  <p>Page Deleted</p>
+  <p>Wohla! Page Deleted</p>
 </div>
 <div class="alert alert-danger" *ngIf="errorMsg">
-  <p>Error deleting Page</p>
+  <p>Opps! Error deleting Page, try again later</p>
 </div>
 
 <h1 class="page-title">Pages</h1>
@@ -22,7 +22,7 @@
       <a routerLink="/admin/edit-page/{{ page._id }}">Edit</a>
     </td>
     <td *ngIf="page.slug != 'home'">
-      <a routerLink="/admin/delete-page/{{ page._id }}">Delete</a>
+      <a (click)="deletePage(page._id)" routerLink="/admin/pages">Delete</a>
     </td>
   </tr>
 </table>

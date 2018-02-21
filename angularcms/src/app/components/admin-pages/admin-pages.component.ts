@@ -22,4 +22,31 @@ export class AdminPagesComponent implements OnInit {
 
     this.pages = this.pageService.pagesBS;
   }
+
+  deletePage(id) {
+    if (confirm('Are you sure, you want to delete this page?')) {
+      this.pageService.getDeletePage(id).subscribe(res => {
+        if (res === 'errorInDelete') {
+          this.errorMsg = true;
+          setTimeout(
+            function() {
+              this.errorMsg = false;
+            }.bind(this),
+            3000
+          );
+        } else {
+          this.successMsg = true;
+          setTimeout(
+            function() {
+              this.successMsg = false;
+            }.bind(this),
+            3000
+          );
+        }
+        this.pageService.getPages().subscribe(resPages => {
+          this.pageService.pagesBS.next(resPages);
+        });
+      });
+    }
+  }
 }

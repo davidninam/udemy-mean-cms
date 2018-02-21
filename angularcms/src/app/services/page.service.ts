@@ -42,4 +42,10 @@ export class PageService {
       .post('http://localhost:3000/pages/edit-page/' + data.id, data)
       .map(res => res.json());
   }
+
+  getDeletePage(id) {
+    return this.http
+      .get('http://localhost:3000/pages/delete-page/' + id)
+      .map(res => res.json());
+  }
 }
